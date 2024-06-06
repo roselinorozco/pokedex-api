@@ -1,0 +1,316 @@
+{
+	"info": {
+		"_postman_id": "f4f8a690-22e2-4fa1-ba7b-e41e67d3f754",
+		"name": "pokedex-local-application-requests",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "30069101"
+	},
+	"item": [
+		{
+			"name": "pokemon-service-requests",
+			"item": [
+				{
+					"name": "Create Pokemon",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{TOKEN_BEARER}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"name\": \"Chikorita\",\n    \"type\": \"normal\",\n    \"legendary\": \"false\",\n    \"abilities\": \"Hidden Leaf, Tackle\",\n    \"weight\": 40,\n    \"height\": 2,\n    \"level\": 24,\n    \"publicItem\": \"false\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8096/api/private/pokemon",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8096",
+							"path": [
+								"api",
+								"private",
+								"pokemon"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update Pokemon",
+					"request": {
+						"method": "PATCH",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{TOKEN_BEARER}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n   \"publicItem\": \"false\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8096/api/private/pokemon/665fa216b3afda6bdeea6c83",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8096",
+							"path": [
+								"api",
+								"private",
+								"pokemon",
+								"665fa216b3afda6bdeea6c83"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete Pokemon",
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{TOKEN_BEARER}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "http://localhost:8096/api/private/pokemon/665fa216b3afda6bdeea6c83",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8096",
+							"path": [
+								"api",
+								"private",
+								"pokemon",
+								"665fa216b3afda6bdeea6c83"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Pokemons by Owner",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{TOKEN_BEARER}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "http://localhost:8096/api/private/pokemon?page=0&size=2",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8096",
+							"path": [
+								"api",
+								"private",
+								"pokemon"
+							],
+							"query": [
+								{
+									"key": "page",
+									"value": "0"
+								},
+								{
+									"key": "size",
+									"value": "2"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Public Pokemons",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8096/api/public/pokemon?page=0&size=3",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8096",
+							"path": [
+								"api",
+								"public",
+								"pokemon"
+							],
+							"query": [
+								{
+									"key": "page",
+									"value": "0"
+								},
+								{
+									"key": "size",
+									"value": "3"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "user-service-requests",
+			"item": [
+				{
+					"name": "Register User",
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"email\": \"user9@example.com\",\n    \"password\": \"57Blocks#123\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://127.0.0.1:8095/api/user",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "8095",
+							"path": [
+								"api",
+								"user"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "User Login",
+					"request": {
+						"auth": {
+							"type": "basic",
+							"basic": [
+								{
+									"key": "password",
+									"value": "",
+									"type": "string"
+								},
+								{
+									"key": "username",
+									"value": "",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"email\": \"user9@example.com\",\n    \"password\": \"57Blocks#123\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://127.0.0.1:8095/api/auth/login",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "8095",
+							"path": [
+								"api",
+								"auth",
+								"login"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "random-number-service",
+			"item": [
+				{
+					"name": "Get Random Number",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8096/api/service/randomnumber",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8096",
+							"path": [
+								"api",
+								"service",
+								"randomnumber"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	],
+	"variable": [
+		{
+			"key": "TOKEN_BEARER",
+			"value": "eyJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJyb3NlbGlub3JvemNvLmNvbSIsInN1YiI6ImV4YW1wbGUxaEBleGFtcGxlLmNvbSIsImF1ZCI6Imh0dHBzOi8vcG9rZWRleGFwaS5yb3NlbGlub3JvemNvLmNvbSIsImV4cCI6MTcxNzQ1Mzc3MH0.kuEvIUer0J6y2WpvwG-uyuTAJpNKBvQ7qje91xZkkE8"
+		}
+	]
+}

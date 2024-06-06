@@ -1,0 +1,26 @@
+runtime: custom
+env: flex
+# Service settings
+service: default
+instance_class: F2
+
+# Environment configuration
+env_variables:
+  POKEDEX_AUTH_SERVICE_SPRING_DATA_MONGODB_URI: "mongodb+srv://pokedexdbuser:LfC4AXqhiQ2$8UNKy@pokedexapicluster0.kxitnjb.mongodb.net/pokemon_db_user_service?retryWrites=true&w=majority&appName=PokedexAPICluster0"
+  POKEDEX_AUTH_SERVICE_PORT: "8080"
+  POKEDEX_AUTH_SERVICE_TOKEN_GENERATOR_SECRET: "ba3275abcef332f2df863feab2992ba12bb2992ba12bb2992ba12bb2992ba12b"
+
+runtime_config:  # Optional runtime configuration
+  jdk: openjdk-17-jdk
+
+automatic_scaling:
+  min_num_instances: 1
+  max_num_instances: 2
+  cool_down_period_sec: 60
+  cpu_utilization:
+    target_utilization: 0.5
+
+resources:
+  cpu: 1
+  memory_gb: 1
+  disk_size_gb: 10

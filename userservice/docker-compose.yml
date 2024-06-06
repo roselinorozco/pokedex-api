@@ -1,0 +1,38 @@
+version: '3.8'
+services:
+  userservice:
+    build: .
+    ports:
+      - "8095:8095"
+    environment:
+      - POKEDEX_AUTH_SERVICE_SPRING_DATA_MONGODB_URI=mongodb://mongouser:mongopass@pokemon_db_user_service:27020/pokemon_db_user_service?authSource=admin&authMechanism=SCRAM-SHA-256
+      - POKEDEX_AUTH_SERVICE_TOKEN_GENERATOR_SECRET=ba3275abcef332f2df863feab2992ba12bb2992ba12bb2992ba12bb2992ba12b
+      - POKEDEX_AUTH_SERVICE_PORT=8095
+    networks:
+      - user-service-network
+    depends_on:
+      - pokemon_db_user_service
+
+  pokemon_db_user_service:
+    image: 'mongo:latest'
+    container_name: pokemon_db_user_service
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: mongouser
+      MONGO_INITDB_ROOT_PASSWORD: mongopass
+      MONGO_INITDB_DATABASE: pokemon_db_user_service
+    command: mongod --port 27020
+    ports:
+      - '27020:27020'
+    networks:
+      - user-service-network
+    volumes:
+      - mongodb_data_user_service:/data/db
+
+networks:
+  user-service-network:
+    driver: bridge
+    name: user-service-network
+
+volumes:
+  mongodb_data_user_service:
+    name: mongodb_data_user_service

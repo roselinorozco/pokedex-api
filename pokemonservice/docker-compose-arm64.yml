@@ -1,0 +1,40 @@
+version: '3.8'
+services:
+  pokemonservice:
+    build:
+      context: ./
+      dockerfile: DockerfileArm64
+    ports:
+      - "8096:8096"
+    environment:
+      - POKEDEX_POKEMON_SERVICE_SPRING_DATA_MONGODB_URI=mongodb://mongouser:mongopass@pokemon_db_pokemon_service:27021/pokemon_db_pokemon_service?authSource=admin&authMechanism=SCRAM-SHA-256
+      - POKEDEX_POKEMON_SERVICE_TOKEN_VALIDATOR_SECRET=ba3275abcef332f2df863feab2992ba12bb2992ba12bb2992ba12bb2992ba12b
+      - POKEDEX_POKEMON_SERVICE_PORT=8096
+    networks:
+      - pokemon-service-network
+    depends_on:
+      - pokemon_db_pokemon_service
+
+  pokemon_db_pokemon_service:
+    image: 'mongo:latest'
+    container_name: pokemon_db_pokemon_service
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: mongouser
+      MONGO_INITDB_ROOT_PASSWORD: mongopass
+      MONGO_INITDB_DATABASE: pokemon_db_pokemon_service
+    command: mongod --port 27021
+    ports:
+      - "27021:27021"
+    networks:
+      - pokemon-service-network
+    volumes:
+      - mongodb_data_pokemon_service:/data/db
+
+networks:
+  pokemon-service-network:
+    driver: bridge
+    name: pokemon-service-network
+
+volumes:
+  mongodb_data_pokemon_service:
+    name: mongodb_data_pokemon_service
