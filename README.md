@@ -11,6 +11,31 @@ The application is composed of two Microservices:
 
 The projects are built with Java 17, Spring Boot 3, Spring Security, Gradle 8.7 (included as gradlew in project) and Mongo DB as database.
 
+## Problem that this REST API is solving:
+
+1. Create a registration service that receives an email and a password.
+
+a. Validate email is a valid email address.
+b. Validate email is not already registered in the database.
+c. Validate password contains at least 10 characters, one lowercase letter, one uppercase letter, and one of the following characters: !, @, #, ? or ].
+d. If any of the above is invalid, send a meaningful response.
+
+2. Allow login into the server with an email and a password.
+
+a. Validate email is a valid email address
+b. Validate email is already registered in the database
+c. Validate password contains at least 10 characters, one lowercase letter, one uppercase letter, and one of the following characters: !, @, #, ? or ].
+d. Validate email and password matches for a previously registered user.
+e. If any of the above is invalid send back a meaningful response.
+f. If all of the above are valid send back a payload including some way for users to identify themselves for subsequent requests. That way to identify users should be invalid after 20 minutes and the user must log in again to continue communication with the server.
+
+3. Allow logged-in users to do CRUD operations into a table/collection of the Pokemons.
+a. Users should be able to create a new element that can only be retrieved by themselves (Private item), or that can be retrieved by others (Public item).
+b. Users should be able to read all public elements in the table/collection.
+c. Users should be able to read all elements created by themselves.
+d. Users should be able to edit at least one field in one of their private items.
+e. Validate that users are trying to read or update their own private elements, otherwise send a meaningful response.
+
 ## Project Architecture Considerations
 
 Our project is structured following the Ports and Adapters architecture (often referred to as Hexagonal Architecture). This approach helps in separating the core logic of the application from the services it interacts with. Below is an overview of how our project packages are organized:
